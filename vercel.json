@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "mkdir -p out && cp index.html shop.html inside.html style.css robots.txt out/ && cp -r img out/img",
+  "buildCommand": "mkdir -p out/products && cp index.html shop.html inside.html mission.html style.css robots.txt out/ && cp products/*.html out/products/ && cp -r img out/img",
   "installCommand": "echo skip",
   "outputDirectory": "out",
   "framework": null,
