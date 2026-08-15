@@ -1,9 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "mkdir -p out && cp index.html robots.txt out/ && cp -r img out/img",
+  "buildCommand": "mkdir -p out && cp index.html shop.html inside.html style.css robots.txt out/ && cp -r img out/img",
   "installCommand": "echo skip",
   "outputDirectory": "out",
   "framework": null,
+  "cleanUrls": true,
   "rewrites": [
     { "source": "/", "destination": "https://ricochetsupplements.com/" },
     { "source": "/:path*", "destination": "https://ricochetsupplements.com/:path*" }
