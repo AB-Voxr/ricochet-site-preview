@@ -43,12 +43,12 @@ header{position:sticky;top:0;z-index:50;background:rgba(11,13,10,.92);backdrop-f
              linear-gradient(180deg,#0D100B 0%, var(--bg) 100%)}
 .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center;padding-top:72px;padding-bottom:72px}
 .hero h1{font-size:clamp(44px,6.2vw,84px);color:var(--chrome)}
-.hero h1 .g{color:var(--green)}
+.hero h1 .acc{color:var(--green)}
 .hero p.sub{margin:22px 0 30px;font-size:18.5px;color:var(--muted);max-width:52ch}
 .hero p.sub b{color:var(--txt);font-weight:600}
 .ticks{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;font-family:"Barlow Condensed";font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-size:14px;color:var(--muted)}
 .ticks span::before{content:"";display:inline-block;width:8px;height:8px;background:var(--green);margin-right:9px;transform:rotate(45deg)}
-.heroCard{background:linear-gradient(160deg,#F7F9F4, #E4E9DE);border-radius:10px;padding:34px 30px;box-shadow:0 0 0 1px rgba(70,224,30,.35), 0 30px 80px rgba(0,0,0,.55), 0 0 90px rgba(70,224,30,.14);position:relative}
+.heroCard{background:#fff;border-radius:10px;padding:34px 30px;box-shadow:0 0 0 1px rgba(70,224,30,.35), 0 30px 80px rgba(0,0,0,.55), 0 0 90px rgba(70,224,30,.14);position:relative}
 .heroCard img{margin:0 auto;max-height:480px;width:auto;filter:drop-shadow(0 18px 30px rgba(0,0,0,.35))}
 .heroCard .tag{position:absolute;top:16px;left:16px;background:#0B0D0A;color:var(--green);font-family:"Barlow Condensed";font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:12.5px;padding:7px 12px;border-radius:3px}
 @media(max-width:900px){.hero .wrap{grid-template-columns:1fr;padding-top:48px}.heroCard{max-width:440px;margin:0 auto}}
@@ -88,7 +88,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(11,13,10,.92);backdrop-f
 .mission .imgSide::after{content:"";position:absolute;inset:0;background:linear-gradient(270deg,var(--panel) 0%,transparent 30%)}
 @media(max-width:900px){.mission .wrap{grid-template-columns:1fr}.mission .imgSide{min-height:300px;border-right:none}.mission .imgSide::after{background:linear-gradient(0deg,var(--panel) 0%,transparent 35%)}.mission .txt{padding:44px 0 64px}}
 .ing .wrap{padding:80px 22px;display:grid;grid-template-columns:.9fr 1.1fr;gap:54px;align-items:center}
-.ingCard{background:linear-gradient(160deg,#F7F9F4,#E4E9DE);border-radius:10px;padding:30px;box-shadow:0 0 0 1px rgba(70,224,30,.3), 0 24px 60px rgba(0,0,0,.5)}
+.ingCard{background:#fff;border-radius:10px;padding:30px;box-shadow:0 0 0 1px rgba(70,224,30,.3), 0 24px 60px rgba(0,0,0,.5)}
 .ingCard img{max-height:430px;width:auto;margin:0 auto}
 .ingList{display:flex;flex-direction:column;gap:0}
 .ingRow{display:grid;grid-template-columns:150px 1fr;gap:18px;padding:17px 0;border-bottom:1px solid var(--line)}
@@ -157,7 +157,7 @@ footer .wrap{padding:54px 22px 30px}
   <div class="wrap">
     <div>
       <span class="eyebrow">Veteran Owned &nbsp;/&nbsp; Texas Built &nbsp;/&nbsp; Full Label</span>
-      <h1>Locked in.<br>No jitters.<br><span class="g">No crash.</span></h1>
+      <h1>Locked in.<br>No jitters.<br><span class="acc">No crash.</span></h1>
       <p class="sub"><b>Ballistic Pre-Workout:</b> 6,000 mg L-Citrulline for max pumps, a 300 mg dual-source caffeine matrix for energy that holds the whole session, and every single dose printed on the label. Built by veterans. Made in the USA.</p>
       <a class="btn" href="/products/ballistic-pre-workout">Shop Ballistic &nbsp;$49.99</a>
       &nbsp;&nbsp;<a class="btn ghost" href="#inside">See what's inside</a>
