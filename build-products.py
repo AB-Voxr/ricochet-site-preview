@@ -11,6 +11,11 @@ HEAD = """<!doctype html>
 <meta name="robots" content="noindex, nofollow">
 <title>{title} | Ricochet Supplements</title>
 <meta name="description" content="{desc}">
+<meta property="og:title" content="{title} | Ricochet Supplements">
+<meta property="og:description" content="{desc}">
+<meta property="og:image" content="{ogimg}">
+<meta property="og:type" content="product">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="https://ricochetsupplements.com/cdn/shop/files/Draft_Final.png?height=64&v=1776456821">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -366,7 +371,8 @@ for p in products:
     related = "\n".join(related_card(s) for s in p["related"])
     revs = p.get("reviews") or []
     reviewsec = REVSEC % "\n".join(rev_card(i, n, d, b, vf) for i, (n, d, b, vf) in enumerate(revs)) if revs else ""
-    html = HEAD.format(title=p["title"], desc=p["desc"]) + PDP.format(
+    ogimg = p["mainimg"] if p["mainimg"].startswith("http") else "https://ricochet-supplements.vercel.app" + p["mainimg"]
+    html = HEAD.format(title=p["title"], desc=p["desc"], ogimg=ogimg) + PDP.format(
         mainimg=p["mainimg"], title=p["title"], flag=p["flag"], price=p["price"],
         thumbs=thumbs, revhead=p["revhead"], revsub=p["revsub"], lede=p["lede"],
         points=points, flavors=flavors, buybtn=buybtn, buynote=buynote, reviewsec=reviewsec,
