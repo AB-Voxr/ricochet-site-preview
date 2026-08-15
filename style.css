@@ -90,6 +90,15 @@ header{position:sticky;top:0;z-index:50;background:var(--dark);border-bottom:1px
 .gBand li .y{color:var(--greenInk);font-weight:700}
 .gBand li small{display:block;color:var(--muted);font-size:13.5px}
 @media(max-width:900px){.gBand{grid-template-columns:1fr}.gBand .ingPhoto{max-width:420px;margin:0 auto}}
+.revGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.rev{background:#fff;border:1px solid var(--line);border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:8px}
+.rev .stars{color:var(--greenInk);font-size:15px;letter-spacing:2px}
+.rev p{color:var(--ink);font-size:15px;flex:1}
+.rev .who{display:flex;justify-content:space-between;align-items:baseline;color:var(--muted);font-size:13px}
+.rev .who b{color:var(--ink);font-family:"Barlow Condensed";font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:14.5px}
+.rev .vrf{color:var(--greenInk);font-family:"Barlow Condensed";font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+@media(max-width:900px){.revGrid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.revGrid{grid-template-columns:1fr}}
 .founderNote{background:#fff;border:1px solid var(--line);border-left:4px solid var(--green);border-radius:10px;padding:30px 32px;max-width:720px;margin:0 auto}
 .founderNote p{color:var(--muted);font-size:16.5px}
 .founderNote .sig{font-family:Anton,Impact,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:var(--ink);margin-top:16px;font-size:18px}

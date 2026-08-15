@@ -118,6 +118,7 @@ PDP = """
   </div>
 </section>
 
+{reviewsec}
 <section class="shopBand">
   <div class="wrap" style="padding-top:80px;padding-bottom:80px">
     <div class="secHead center rv">
@@ -174,19 +175,41 @@ PDP = """
 def v(url):
     return url if "?" in url else url + "?width=700"
 
+REVSEC = """
+<section>
+  <div class="wrap" style="padding-top:80px;padding-bottom:80px">
+    <div class="secHead center rv">
+      <span class="eyebrow">Verified Customers</span>
+      <h2>What the unit says</h2>
+      <p>Pulled word for word from verified customer reviews on the Ricochet store.</p>
+    </div>
+    <div class="revGrid">
+%s
+    </div>
+  </div>
+</section>
+"""
+
+def rev_card(i, name, date, body, verified=True):
+    vrf = '<span class="vrf">Verified</span>' if verified else ""
+    return ('      <div class="rev rv" data-d="%d"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>'
+            '<p>"%s"</p><div class="who"><b>%s</b>%s<span>%s</span></div></div>'
+            % (i * 70, body, name, vrf, date))
+
 products = [
     dict(slug="ballistic-pre-workout", title="Ballistic Pre-Workout", flag="Flagship / High-Stim Pre-Workout",
          price="$49.99", mainimg="/img/ballistic-card.jpg",
          gallery=[("/img/ballistic-card.jpg", "Splash"),
                   (CDN + "Ballistic_PRE_SC_1.png?v=1779111666&width=700", "Sour Cherry"),
                   (CDN + "Ballistic_PRE_HB_2-2.png?v=1779111629&width=700", "Hawaiian Blitz"),
-                  (CDN + "Ballistic_PRE_RP_1.png?v=1784857721&width=700", "Rocket Pop")],
+                  (CDN + "IMG-4832.png?width=700", "Supplement Facts")],
          desc="High-stim pre-workout with 6,000 mg L-Citrulline and a 300 mg dual-source caffeine matrix. Every dose on the label.",
          lede="The flagship. Max pumps, a caffeine curve engineered against the crash, and dialed-in focus, with every single dose printed on the label.",
          points=["6,000 mg L-Citrulline for pumps and blood flow",
+                 "3,200 mg Beta-Alanine for rep-after-rep endurance",
                  "300 mg dual-source caffeine: fast onset, long burn, no crash",
-                 "Alpha-GPC plus L-Tyrosine for locked-in focus",
-                 "Pink Himalayan Salt for hydration and fullness"],
+                 "1,000 mg L-Tyrosine plus Alpha-GPC and L-Theanine for locked-in focus",
+                 "Electrolytes from Pink Himalayan Salt for hydration"],
          flavors=[("Sour Cherry Rush", "47667740901606", CDN + "Ballistic_PRE_SC_1.png?v=1779111666&width=700"),
                   ("Hawaiian Blitz", "47667740934374", CDN + "Ballistic_PRE_HB_2-2.png?v=1779111629&width=700"),
                   ("Rocket Pop", "48036105978086", CDN + "Ballistic_PRE_RP_1.png?v=1784857721&width=700")],
@@ -195,10 +218,16 @@ products = [
          insidehead="Every dose on the label. Nothing hidden.",
          insidesub="The full Ballistic formula, disclosed to the milligram.",
          ings=[("6,000 mg", "L-Citrulline", "Max nitric oxide for blood flow, vascularity and pumps that actually show up."),
-               ("300 mg", "Dual-Source Caffeine", "Caffeine Anhydrous for the hit, Infinergy Di-Caffeine Malate for the long burn."),
-               ("Alpha-GPC", "Focus", "Sharper mind-to-muscle connection when the set gets heavy."),
-               ("L-Tyrosine", "Stress Focus", "Holds concentration under fatigue, late in the session."),
-               ("Pink Salt", "Hydration", "Himalayan salt for cell hydration and fuller pumps.")],
+               ("3,200 mg", "Beta-Alanine", "Buffers acid in working muscle for endurance deep into the set. Yes, the tingles are real, and they mean it's dosed."),
+               ("300 mg", "Dual-Source Caffeine", "225 mg Caffeine Anhydrous for the hit, Infinergy Di-Caffeine Malate for the long burn."),
+               ("1,000 mg", "L-Tyrosine", "Holds concentration under fatigue, late in the session."),
+               ("300 mg", "Alpha-GPC 50%", "Sharper mind-to-muscle connection, with 100 mg L-Theanine smoothing the stim curve."),
+               ("Electrolytes", "Pink Salt + Mag + K", "Sodium from Himalayan salt with magnesium and potassium for hydration and fuller pumps.")],
+         reviews=[("Robert Deleon", "08/12/2026", "Amazing flavor! Energy and intensity that lasts! Absolute banger of a preworkout. Highly recommend!", True),
+                  ("Joel Orozco", "08/01/2026", "Great preworkout ive been in the preworkout game for 16 years tried multiple across the board this is hands down top 5!", True),
+                  ("Rick", "07/31/2026", "Got this pre once and now it's the only pre I get. Good stuff", False),
+                  ("Verified Customer", "07/31/2026", "This formula is awesome and it tastes great. Whether you pre measure or dry scoop like a maniac (me) you're about to get that pump! Shout out Mark and his team for providing the RGV with these high quality products!!", True),
+                  ("Dustin Valdez", "07/31/2026", "I get the best workouts using this pre workout!!!! LOVE IT!!", True)],
          related=["creatine-monohydrate", "ricochet-shaker-bottle", "tango-protocol-testosterone-booster"]),
     dict(slug="creatine-monohydrate", title="Creatine Monohydrate", flag="Daily Essential",
          price="$32.99", mainimg="/img/creatine-card.jpg",
@@ -217,8 +246,12 @@ products = [
          insidehead="One ingredient. Full dose.",
          insidesub="The entire label, in one row:",
          ings=[("5 g", "Micronized Creatine", "The gold standard for strength and power, micronized so it dissolves clean. Nothing else in the tub.")],
+         reviews=[("Daniel Montano", "07/18/2026", "Really happy with this creatine so far. It mixes easily, doesn't have a weird taste, and I've definitely noticed better strength and performance during my workouts. No stomach issues either, which is a big plus. Great quality for the price, and I'll definitely be ordering it again.", True),
+                  ("John Hernandez", "07/28/2026", "Frequently seeing noticeable gains in workout stamina, muscle recovery, and overall lifting power over time each day in the gym.", True),
+                  ("Alexis Exinia", "07/28/2026", "I love that it's not grainy at all like previous ones I have purchased and I mix it up with my pre workout and thermos before a workout!", True),
+                  ("Mike Mendez", "07/31/2026", "Great product! No complaints on product, and I also love the T shirt. Awesome fit and fits fantastic. Also the customer service was amazing, they were able to meet for local delivery and followed up asking if the products met my standard.", True)],
          related=["ballistic-pre-workout", "ricochet-shaker-bottle", "afterburn-mach-i"]),
-    dict(slug="afterburn-mach-i", title="Afterburn Mach-I", flag="Capsule Formula",
+    dict(slug="afterburn-mach-i", title="Afterburn Mach-I", flag="Thermogenic Capsules",
          price="$44.99", mainimg="/img/afterburn-card.jpg",
          gallery=[("/img/afterburn-card.jpg", "Splash"),
                   (CDN + "Ricochet-60Ct-Mockup-F-V3.jpg?v=1776452597&width=700", "Bottle"),
@@ -234,15 +267,20 @@ products = [
          revhead="5 verified customer reviews", revsub="Live on the current store; full review import lands with the store build.",
          insidehead="The label is on the bottle.",
          insidesub="Full supplement facts are in the gallery above; the lab-sheet page lands on What's Inside as it's published.",
-         ings=[("2 caps", "Per Serving", "Taken 20 to 30 minutes before training for sustained energy and focus through the session."),
-               ("60 caps", "Per Bottle", "30 servings of vegetarian capsules per bottle.")],
+         ings=[("2 caps", "Per Serving", "Taken 20 to 30 minutes before training for thermogenic energy and focus through the session."),
+               ("60 caps", "Per Bottle", "30 servings of vegetarian capsules per bottle. Full panel in the gallery above.")],
+         reviews=[("Abel", "07/27/2026", "Mach 1 was critical in helping me shed unwanted body fat while hitting the gym hard. No crash, no jitters, just focus and appetite suppression. If you're trying to take your workouts to the next level. This is the supplement for you!", False),
+                  ("Lola", "05/01/2026", "Literally my favorite supplement for Laser focus during lifts, no crash no jitters.", True),
+                  ("Blanca", "04/22/2026", "I can feel the difference taking these compared to other fat burners on the market. I am less hungry and I have no midday crash so more energy throughout the day! These work extremely well!", False),
+                  ("Kris", "04/21/2026", "Can feel, and see the difference. Keeps energy up during long workouts", False),
+                  ("Itzel", "04/21/2026", "Amazing source of energy, without jitters, or the crash afterwards", False)],
          related=["ballistic-pre-workout", "tango-protocol-testosterone-booster", "creatine-monohydrate"]),
     dict(slug="tango-protocol-testosterone-booster", title="Tango Protocol", flag="Recovery / Vitality",
          price="$54.99", mainimg="/img/tango-card.jpg",
          gallery=[("/img/tango-card.jpg", "Splash"),
                   (CDN + "Tango_Protocol_Booster_1.png?v=1783978708&width=700", "Bottle"),
                   (CDN + "T-Booster_1.jpg?width=700", "Detail"),
-                  (CDN + "Tango_Protocol_Booster_2.png?width=700", "Angle")],
+                  (CDN + "Tango_Protocol_Booster_2.png?width=700", "Back Label")],
          desc="Testosterone support with a full 600 mg of KSM-66 Ashwagandha plus Shilajit, Tongkat Ali, D3 and Zinc.",
          lede="Recovery and vitality support built on disclosed doses: a full 600 mg of KSM-66 Ashwagandha with Shilajit, Tongkat Ali, BioPerine, Vitamin D3 and Zinc.",
          points=["KSM-66 Ashwagandha at a full 600 mg",
@@ -326,10 +364,12 @@ for p in products:
     ingrows = "\n".join('      <div class="ingRow rv" data-d="%d"><span class="dose">%s<small>%s</small></span><p>%s</p></div>'
                         % (i * 60, d, s, t) for i, (d, s, t) in enumerate(p["ings"]))
     related = "\n".join(related_card(s) for s in p["related"])
+    revs = p.get("reviews") or []
+    reviewsec = REVSEC % "\n".join(rev_card(i, n, d, b, vf) for i, (n, d, b, vf) in enumerate(revs)) if revs else ""
     html = HEAD.format(title=p["title"], desc=p["desc"]) + PDP.format(
         mainimg=p["mainimg"], title=p["title"], flag=p["flag"], price=p["price"],
         thumbs=thumbs, revhead=p["revhead"], revsub=p["revsub"], lede=p["lede"],
-        points=points, flavors=flavors, buybtn=buybtn, buynote=buynote,
+        points=points, flavors=flavors, buybtn=buybtn, buynote=buynote, reviewsec=reviewsec,
         insidehead=p["insidehead"], insidesub=p["insidesub"], ingrows=ingrows, related=related) + FOOT
     path = os.path.join(OUT, p["slug"] + ".html")
     with open(path, "w", encoding="utf-8") as f:
