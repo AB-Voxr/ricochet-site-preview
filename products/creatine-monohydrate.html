@@ -30,13 +30,13 @@
 <section>
   <div class="wrap pdp" style="padding-top:60px;padding-bottom:80px">
     <div class="gal rv">
-      <div class="main pdpImg" style="position:static;padding:0;border:none"><div class="main" style="margin:0"><img id="mainImg" src="/img/creatine-card.jpg" alt="Creatine Monohydrate"></div>
+      <div class="main"><img id="mainImg" src="/img/creatine-card.jpg" alt="Creatine Monohydrate"></div>
       <div class="thumbs">
         <button type="button" class="on" data-img="/img/creatine-card.jpg"><img src="/img/creatine-card.jpg" alt="Splash"></button>
         <button type="button" data-img="https://cdn.shopify.com/s/files/1/0801/6933/7062/files/RicochetCreatineThumbnail_1.jpg?v=1776453028&width=700"><img src="https://cdn.shopify.com/s/files/1/0801/6933/7062/files/RicochetCreatineThumbnail_1.jpg?v=1776453028&width=700" alt="Tub"></button>
         <button type="button" data-img="https://cdn.shopify.com/s/files/1/0801/6933/7062/files/Creatine_1.jpg?width=700"><img src="https://cdn.shopify.com/s/files/1/0801/6933/7062/files/Creatine_1.jpg?width=700" alt="Detail"></button>
         <button type="button" data-img="https://cdn.shopify.com/s/files/1/0801/6933/7062/files/SF_Panel_Creatine_1.png?width=700"><img src="https://cdn.shopify.com/s/files/1/0801/6933/7062/files/SF_Panel_Creatine_1.png?width=700" alt="Label panel"></button>
-      </div></div>
+      </div>
     </div>
     <div class="pdpInfo">
       <span class="flag">Daily Essential</span>
@@ -162,21 +162,21 @@
   </div>
 </footer>
 <script>
-const io = new IntersectionObserver(es => es.forEach(e => {{if (e.isIntersecting) {{e.target.classList.add('in'); io.unobserve(e.target)}}}}), {{threshold: .12}});
-document.querySelectorAll('.rv').forEach(el => {{el.style.transitionDelay = (el.dataset.d || 0) + 'ms'; io.observe(el)}});
+const io = new IntersectionObserver(es => es.forEach(e => {if (e.isIntersecting) {e.target.classList.add('in'); io.unobserve(e.target)}}), {threshold: .12});
+document.querySelectorAll('.rv').forEach(el => {el.style.transitionDelay = (el.dataset.d || 0) + 'ms'; io.observe(el)});
 const mainImg = document.getElementById('mainImg');
-document.querySelectorAll('.thumbs button').forEach(b => b.addEventListener('click', () => {{
+document.querySelectorAll('.thumbs button').forEach(b => b.addEventListener('click', () => {
   document.querySelectorAll('.thumbs button').forEach(x => x.classList.remove('on'));
   b.classList.add('on');
   mainImg.src = b.dataset.img;
-}}));
+}));
 const cartBtn = document.getElementById('cartBtn');
-document.querySelectorAll('.flavorPills .pill[data-variant]').forEach(p => p.addEventListener('click', () => {{
+document.querySelectorAll('.flavorPills .pill[data-variant]').forEach(p => p.addEventListener('click', () => {
   document.querySelectorAll('.flavorPills .pill').forEach(x => x.classList.remove('on'));
   p.classList.add('on');
   if (cartBtn) cartBtn.href = 'https://ricochetsupplements.com/cart/' + p.dataset.variant + ':1';
   if (p.dataset.img) mainImg.src = p.dataset.img;
-}}));
+}));
 </script>
 </body>
 </html>

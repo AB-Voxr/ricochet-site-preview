@@ -70,21 +70,21 @@ FOOT = """
   </div>
 </footer>
 <script>
-const io = new IntersectionObserver(es => es.forEach(e => {{if (e.isIntersecting) {{e.target.classList.add('in'); io.unobserve(e.target)}}}}), {{threshold: .12}});
-document.querySelectorAll('.rv').forEach(el => {{el.style.transitionDelay = (el.dataset.d || 0) + 'ms'; io.observe(el)}});
+const io = new IntersectionObserver(es => es.forEach(e => {if (e.isIntersecting) {e.target.classList.add('in'); io.unobserve(e.target)}}), {threshold: .12});
+document.querySelectorAll('.rv').forEach(el => {el.style.transitionDelay = (el.dataset.d || 0) + 'ms'; io.observe(el)});
 const mainImg = document.getElementById('mainImg');
-document.querySelectorAll('.thumbs button').forEach(b => b.addEventListener('click', () => {{
+document.querySelectorAll('.thumbs button').forEach(b => b.addEventListener('click', () => {
   document.querySelectorAll('.thumbs button').forEach(x => x.classList.remove('on'));
   b.classList.add('on');
   mainImg.src = b.dataset.img;
-}}));
+}));
 const cartBtn = document.getElementById('cartBtn');
-document.querySelectorAll('.flavorPills .pill[data-variant]').forEach(p => p.addEventListener('click', () => {{
+document.querySelectorAll('.flavorPills .pill[data-variant]').forEach(p => p.addEventListener('click', () => {
   document.querySelectorAll('.flavorPills .pill').forEach(x => x.classList.remove('on'));
   p.classList.add('on');
   if (cartBtn) cartBtn.href = 'https://ricochetsupplements.com/cart/' + p.dataset.variant + ':1';
   if (p.dataset.img) mainImg.src = p.dataset.img;
-}}));
+}));
 </script>
 </body>
 </html>
@@ -94,10 +94,10 @@ PDP = """
 <section>
   <div class="wrap pdp" style="padding-top:60px;padding-bottom:80px">
     <div class="gal rv">
-      <div class="main pdpImg" style="position:static;padding:0;border:none"><div class="main" style="margin:0"><img id="mainImg" src="{mainimg}" alt="{title}"></div>
+      <div class="main"><img id="mainImg" src="{mainimg}" alt="{title}"></div>
       <div class="thumbs">
 {thumbs}
-      </div></div>
+      </div>
     </div>
     <div class="pdpInfo">
       <span class="flag">{flag}</span>

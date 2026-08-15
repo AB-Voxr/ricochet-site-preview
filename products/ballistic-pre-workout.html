@@ -30,13 +30,13 @@
 <section>
   <div class="wrap pdp" style="padding-top:60px;padding-bottom:80px">
     <div class="gal rv">
-      <div class="main pdpImg" style="position:static;padding:0;border:none"><div class="main" style="margin:0"><img id="mainImg" src="/img/ballistic-card.jpg" alt="Ballistic Pre-Workout"></div>
+      <div class="main"><img id="mainImg" src="/img/ballistic-card.jpg" alt="Ballistic Pre-Workout"></div>
       <div class="thumbs">
         <button type="button" class="on" data-img="/img/ballistic-card.jpg"><img src="/img/ballistic-card.jpg" alt="Splash"></button>
         <button type="button" data-img="https://cdn.shopify.com/s/files/1/0801/6933/7062/files/Ballistic_PRE_SC_1.png?v=1779111666&width=700"><img src="https://cdn.shopify.com/s/files/1/0801/6933/7062/files/Ballistic_PRE_SC_1.png?v=1779111666&width=700" alt="Sour Cherry"></button>
         <button type="button" data-img="https://cdn.shopify.com/s/files/1/0801/6933/7062/files/Ballistic_PRE_HB_2-2.png?v=1779111629&width=700"><img src="https://cdn.shopify.com/s/files/1/0801/6933/7062/files/Ballistic_PRE_HB_2-2.png?v=1779111629&width=700" alt="Hawaiian Blitz"></button>
         <button type="button" data-img="https://cdn.shopify.com/s/files/1/0801/6933/7062/files/Ballistic_PRE_RP_1.png?v=1784857721&width=700"><img src="https://cdn.shopify.com/s/files/1/0801/6933/7062/files/Ballistic_PRE_RP_1.png?v=1784857721&width=700" alt="Rocket Pop"></button>
-      </div></div>
+      </div>
     </div>
     <div class="pdpInfo">
       <span class="flag">Flagship / High-Stim Pre-Workout</span>
@@ -167,21 +167,21 @@
   </div>
 </footer>
 <script>
-const io = new IntersectionObserver(es => es.forEach(e => {{if (e.isIntersecting) {{e.target.classList.add('in'); io.unobserve(e.target)}}}}), {{threshold: .12}});
-document.querySelectorAll('.rv').forEach(el => {{el.style.transitionDelay = (el.dataset.d || 0) + 'ms'; io.observe(el)}});
+const io = new IntersectionObserver(es => es.forEach(e => {if (e.isIntersecting) {e.target.classList.add('in'); io.unobserve(e.target)}}), {threshold: .12});
+document.querySelectorAll('.rv').forEach(el => {el.style.transitionDelay = (el.dataset.d || 0) + 'ms'; io.observe(el)});
 const mainImg = document.getElementById('mainImg');
-document.querySelectorAll('.thumbs button').forEach(b => b.addEventListener('click', () => {{
+document.querySelectorAll('.thumbs button').forEach(b => b.addEventListener('click', () => {
   document.querySelectorAll('.thumbs button').forEach(x => x.classList.remove('on'));
   b.classList.add('on');
   mainImg.src = b.dataset.img;
-}}));
+}));
 const cartBtn = document.getElementById('cartBtn');
-document.querySelectorAll('.flavorPills .pill[data-variant]').forEach(p => p.addEventListener('click', () => {{
+document.querySelectorAll('.flavorPills .pill[data-variant]').forEach(p => p.addEventListener('click', () => {
   document.querySelectorAll('.flavorPills .pill').forEach(x => x.classList.remove('on'));
   p.classList.add('on');
   if (cartBtn) cartBtn.href = 'https://ricochetsupplements.com/cart/' + p.dataset.variant + ':1';
   if (p.dataset.img) mainImg.src = p.dataset.img;
-}}));
+}));
 </script>
 </body>
 </html>
