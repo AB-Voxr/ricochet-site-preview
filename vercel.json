@@ -1,7 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "mkdir -p out/img && cp index.html robots.txt out/ && cp img/mission.jpg out/img/",
+  "installCommand": "echo skip",
+  "outputDirectory": "out",
+  "framework": null,
   "rewrites": [
-    { "source": "/img/mission.jpg", "destination": "https://d8j0ntlcm91z4.cloudfront.net/user_3DHuQONfsBV6ZWPSg7hmPD97Rpm/hf_20260815_012822_cf8f813c-9f5f-45d9-a1c0-5d4068c7307e_min.webp" },
     { "source": "/", "destination": "https://ricochetsupplements.com/" },
     { "source": "/:path*", "destination": "https://ricochetsupplements.com/:path*" }
   ],
