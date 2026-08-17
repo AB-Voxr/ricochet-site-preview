@@ -224,3 +224,19 @@ footer .wrap{padding:60px 22px 30px}
 .collHead{display:flex;align-items:baseline;justify-content:space-between;margin:0 0 26px}
 .collHead h2{font-size:clamp(26px,3vw,38px)}
 .collHead span{color:var(--muted);font-family:"Barlow Condensed";font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-size:14px}
+/* What's Inside product tabs (v7) */
+.insideTabs{position:sticky;top:65px;z-index:40;background:#fff;border-bottom:1px solid var(--line)}
+.insideTabs .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.insideTabs .wrap::-webkit-scrollbar{display:none}
+.insideTabs .tab{flex:0 0 auto;appearance:none;-webkit-appearance:none;background:none;border:0;border-bottom:3px solid transparent;margin-bottom:-1px;padding:17px 18px 14px;font-family:"Barlow Condensed",Barlow,sans-serif;font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:15px;line-height:1.2;color:var(--muted);cursor:pointer;white-space:nowrap;transition:color .15s ease,border-color .15s ease}
+.insideTabs .tab:hover{color:var(--ink)}
+.insideTabs .tab.on{color:var(--greenInk);border-bottom-color:var(--green)}
+.insideTabs .tab:focus-visible{outline:2px solid var(--greenInk);outline-offset:-2px}
+.insideTabs .tab .short{display:none}
+@media(max-width:560px){.insideTabs .tab{padding:15px 10px 12px;font-size:14px;letter-spacing:.06em}.insideTabs .tab .full{display:none}.insideTabs .tab .short{display:inline}}
+.track{display:none}
+.track.on{display:block}
+section .wrap.trackHead{padding-top:64px;padding-bottom:0}
+.trackHead h2{font-size:clamp(28px,3.2vw,40px);margin-top:8px}
+.trackHead p{color:var(--muted);margin-top:10px;font-size:16.5px;max-width:64ch}
+.tracks .scrollyPin{top:136px;height:calc(100vh - 176px)}

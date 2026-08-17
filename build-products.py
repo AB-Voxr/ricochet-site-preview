@@ -129,7 +129,7 @@ PDP = """
     <div class="secHead center rv">
       <span class="eyebrow">What's Inside</span>
       <h2>{insidehead}</h2>
-      <p>{insidesub} <a href="/inside" style="color:var(--greenInk);font-weight:600">Full ingredient breakdown</a>.</p>
+      <p>{insidesub} <a href="{insidelink}" style="color:var(--greenInk);font-weight:600">Full ingredient breakdown</a>.</p>
     </div>
     <div class="ingList" style="max-width:780px;margin:0 auto">
 {ingrows}
@@ -184,9 +184,9 @@ REVSEC = """
 <section>
   <div class="wrap" style="padding-top:80px;padding-bottom:80px">
     <div class="secHead center rv">
-      <span class="eyebrow">Verified Customers</span>
+      <span class="eyebrow">Customer Reviews</span>
       <h2>What the unit says</h2>
-      <p>Pulled word for word from verified customer reviews on the Ricochet store.</p>
+      <p>Pulled word for word from customer reviews on the Ricochet store; verified purchases are marked.</p>
     </div>
     <div class="revGrid">
 %s
@@ -262,18 +262,22 @@ products = [
                   (CDN + "Ricochet-60Ct-Mockup-F-V3.jpg?v=1776452597&width=700", "Bottle"),
                   (CDN + "Afterburn_1.jpg?width=700", "Detail"),
                   (CDN + "Supplement_Facts.png?width=700", "Label panel")],
-         desc="Capsule energy and focus formula. Two capsules, 20 to 30 minutes before training.",
-         lede="Session energy in capsule form: a sustained energy matrix with laser focus, two capsules about 20 minutes before you train.",
-         points=["Sustained energy matrix, engineered against the crash",
-                 "Laser focus without the jitters",
-                 "60 vegetarian capsules per bottle",
-                 "Simple dosing: 2 capsules, 20 to 30 minutes pre-training"],
+         desc="Thermogenic capsules: 275 mg dual-form caffeine, green tea EGCG, Paradoxine, Capsimax and a focus stack, every dose disclosed. Two capsules, 20 to 30 minutes before training.",
+         lede="Session energy in capsule form: a nine-active thermogenic with every dose on the label, two capsules about 20 to 30 minutes before you train.",
+         points=["275 mg caffeine from two release speeds, engineered against the crash",
+                 "Green tea catechins, Paradoxine and Capsimax: the studied thermogenic trio",
+                 "Alpha-GPC and L-Theanine for focus without the jitters",
+                 "60 capsules per bottle: 30 servings of 2, taken 20 to 30 minutes pre-training"],
          flavors=[], variant="47547869397222", available=True,
-         revhead="5 verified customer reviews", revsub="Live on the current store; full review import lands with the store build.",
-         insidehead="The label is on the bottle.",
-         insidesub="Full supplement facts are in the gallery above; the lab-sheet page lands on What's Inside as it's published.",
-         ings=[("2 caps", "Per Serving", "Taken 20 to 30 minutes before training for thermogenic energy and focus through the session."),
-               ("60 caps", "Per Bottle", "30 servings of vegetarian capsules per bottle. Full panel in the gallery above.")],
+         revhead="5 customer reviews", revsub="Live on the current store; full review import lands with the store build.",
+         insidehead="Every dose on the label.",
+         insidesub="All nine actives, straight from the panel (also in the gallery above):",
+         ings=[("275 mg", "Caffeine, 2 forms", "Caffeine anhydrous plus sustained-release caffeine: fast onset and a long tail, roughly three cups of coffee per serving."),
+               ("250 mg", "Green Tea Extract", "Standardized to 50 percent polyphenols and 15 percent EGCG, the catechins that pair with caffeine."),
+               ("200 mg", "Acetyl-L-Carnitine", "The carnitine form that also crosses into the brain, alongside 25 mg ProGBB, its precursor."),
+               ("150 mg", "Alpha-GPC 50%", "The focus half of the formula, with 100 mg L-Theanine smoothing the stim curve."),
+               ("30 mg", "Paradoxine", "Grains of paradise extract, at the 30 mg used in the human energy-expenditure research."),
+               ("25 mg", "Capsimax", "Capsicum extract, 2 percent capsaicinoids in a beadlet that releases past the stomach, plus 5 mg BioPerine for absorption.")],
          reviews=[("Abel", "07/27/2026", "Mach 1 was critical in helping me shed unwanted body fat while hitting the gym hard. No crash, no jitters, just focus and appetite suppression. If you're trying to take your workouts to the next level. This is the supplement for you!", False),
                   ("Lola", "05/01/2026", "Literally my favorite supplement for Laser focus during lifts, no crash no jitters.", True),
                   ("Blanca", "04/22/2026", "I can feel the difference taking these compared to other fat burners on the market. I am less hungry and I have no midday crash so more energy throughout the day! These work extremely well!", False),
@@ -340,6 +344,10 @@ products = [
 
 cards = {p["slug"]: p for p in products}
 
+# Deep-link each supplement's "Full ingredient breakdown" to its tab on /inside (gear links to the page top).
+INSIDE_HASH = {"ballistic-pre-workout": "ballistic", "creatine-monohydrate": "creatine",
+               "afterburn-mach-i": "afterburn", "tango-protocol-testosterone-booster": "tango"}
+
 def related_card(slug):
     p = cards[slug]
     img = p["mainimg"]
@@ -374,11 +382,13 @@ for p in products:
     revs = p.get("reviews") or []
     reviewsec = REVSEC % "\n".join(rev_card(i, n, d, b, vf) for i, (n, d, b, vf) in enumerate(revs)) if revs else ""
     ogimg = p["mainimg"] if p["mainimg"].startswith("http") else "https://ricochet-supplements.vercel.app" + p["mainimg"]
+    insidelink = "/inside#" + INSIDE_HASH[p["slug"]] if p["slug"] in INSIDE_HASH else "/inside"
     html = HEAD.format(title=p["title"], desc=p["desc"], ogimg=ogimg) + PDP.format(
         mainimg=p["mainimg"], title=p["title"], flag=p["flag"], price=p["price"],
         thumbs=thumbs, revhead=p["revhead"], revsub=p["revsub"], lede=p["lede"],
         points=points, flavors=flavors, buybtn=buybtn, buynote=buynote, reviewsec=reviewsec,
-        insidehead=p["insidehead"], insidesub=p["insidesub"], ingrows=ingrows, related=related) + FOOT
+        insidehead=p["insidehead"], insidesub=p["insidesub"], insidelink=insidelink,
+        ingrows=ingrows, related=related) + FOOT
     path = os.path.join(OUT, p["slug"] + ".html")
     with open(path, "w", encoding="utf-8") as f:
         f.write(html)
